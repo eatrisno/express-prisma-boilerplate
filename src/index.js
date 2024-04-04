@@ -2,10 +2,9 @@ const app = require('./app');
 const logger = require('./config/logger');
 const config = require('./config/config');
 
-
 const server = app.listen(config.port, () => {
-    logger.info(`Environment ${config.env}`);
-    logger.info(`Listening to port ${config.port}`);
+  logger.info(`Environment ${config.env}`);
+  logger.info(`Listening to port ${config.port}`);
 });
 
 const exitHandler = () => {
