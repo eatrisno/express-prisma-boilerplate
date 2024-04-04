@@ -1,7 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
-const xss = require('xss-clean');
-// const mongoSanitize = require('express-mongo-sanitize');
+const sanitizer = require('perfect-express-sanitizer');
 const compression = require('compression');
 const cors = require('cors');
 const passport = require('passport');
@@ -15,7 +14,7 @@ const ApiError = require('./utils/apiError');
 
 const app = express();
 
-if (config.env !== 'test') {
+if (config.env !== 'development') {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
 }
@@ -30,9 +29,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // sanitize request data
-app.use(xss());
-// app.use(mongoSanitize());
-
+app.use(
+  sanitizer.clean({
+    xss: true,
+    noSql: true,
+    sql: true,
+  }),
+);
 // gzip compression
 app.use(compression());
 

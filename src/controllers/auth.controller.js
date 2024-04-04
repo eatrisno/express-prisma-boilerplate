@@ -6,7 +6,7 @@ const {
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
-  res.status(httpStatus.CREATED).send({ user });
+  res.status(httpStatus.CREATED).send(user);
 });
 
 const login = catchAsync(async (req, res) => {
