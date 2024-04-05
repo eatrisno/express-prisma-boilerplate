@@ -1,10 +1,11 @@
 const httpStatus = require('http-status');
 const bcrypt = require('bcryptjs');
-const tokenService = require('../token/token.service');
-const userService = require('../user/user.service');
-const ApiError = require('../common/utils/apiError');
-const { tokenTypes } = require('../common/config/tokens');
 const db = require('../common/providers/database/prisma');
+const { userService } = require('../user');
+const { tokenService } = require('../token');
+const { tokenTypes } = require('../common/config/tokens');
+const ApiError = require('../utils/apiError');
+const logger = require('../common/logger');
 
 /**
  * Login with username and password
@@ -17,7 +18,7 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   if (!user || !bcrypt.compare(password, user.password)) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
-  return user;
+  return { id: user.id, email: user.email, name: user.name };
 };
 
 /**
@@ -26,13 +27,11 @@ const loginUserWithEmailAndPassword = async (email, password) => {
  * @returns {Promise}
  */
 const logout = async (refreshToken) => {
-  const refreshTokenDoc = await db.token.findOne(
-    { token: refreshToken, type: tokenTypes.REFRESH, blacklisted: false },
-  );
+  const refreshTokenDoc = await tokenService.verifyToken(refreshToken, tokenTypes.REFRESH);
   if (!refreshTokenDoc) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
   }
-  await refreshTokenDoc.remove();
+  return tokenService.removeToken(refreshTokenDoc.userId);
 };
 
 /**
@@ -43,13 +42,13 @@ const logout = async (refreshToken) => {
 const refreshAuth = async (refreshToken) => {
   try {
     const refreshTokenDoc = await tokenService.verifyToken(refreshToken, tokenTypes.REFRESH);
-    const user = await userService.getUserById(refreshTokenDoc.user);
+    const user = await userService.getUserById(refreshTokenDoc.userId);
     if (!user) {
       throw new Error();
     }
-    await refreshTokenDoc.remove();
     return tokenService.generateAuthTokens(user);
   } catch (error) {
+    logger.error('AuthService', error);
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate');
   }
 };

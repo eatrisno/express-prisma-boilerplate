@@ -4,7 +4,7 @@ const httpStatus = require('http-status');
 const config = require('../common/config/config');
 const userService = require('../user/user.service');
 const db = require('../common/providers/database/prisma');
-const ApiError = require('../common/utils/apiError');
+const ApiError = require('../utils/apiError');
 const { tokenTypes } = require('../common/config/tokens');
 
 /**
@@ -23,6 +23,20 @@ const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
     type,
   };
   return jwt.sign(payload, secret);
+};
+
+/**
+ * remove a token
+ * @param {ObjectId} id
+ * @returns {Promise<Token>}
+ */
+const removeToken = async (userId) => {
+  const deleteToken = await db.token.delete({
+    where: {
+      userId,
+    },
+  });
+  return deleteToken;
 };
 
 /**
@@ -66,8 +80,11 @@ const saveToken = async (token, userId, expires, type, blacklisted = false) => {
  */
 const verifyToken = async (token, type) => {
   const payload = jwt.verify(token, config.jwt.secret);
-  const tokenDoc = await db.token.findOne({
-    token, type, user: payload.sub, blacklisted: false,
+
+  const tokenDoc = await db.token.findUnique({
+    where: {
+      token, type, userId: payload.sub, blacklisted: false,
+    },
   });
   if (!tokenDoc) {
     throw new Error('Token not found');
@@ -130,6 +147,7 @@ const generateVerifyEmailToken = async (user) => {
 
 module.exports = {
   generateToken,
+  removeToken,
   saveToken,
   verifyToken,
   generateAuthTokens,

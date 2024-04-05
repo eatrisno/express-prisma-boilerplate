@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const ApiError = require('../common/utils/apiError');
+const ApiError = require('../utils/apiError');
 const db = require('../common/providers/database/prisma');
 
 /**
@@ -70,7 +70,7 @@ const queryUsers = async (filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getUserById = async (id) => db.user.findById(id);
+const getUserById = async (id) => db.user.findUnique({ where: { id } });
 
 /**
  * Update user by id

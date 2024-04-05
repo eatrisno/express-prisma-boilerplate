@@ -1,9 +1,8 @@
-/* eslint-disable import/no-dynamic-require, global-require */
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-const logger = require('../common/config/logger');
+const logger = require('../../common/logger');
 
 const router = express.Router();
 
@@ -20,8 +19,8 @@ fs.readdir(baseDir, (err, files) => {
   routeFiles.forEach((file) => {
     const routeName = file.replace('.route.js', '');
     const controllerPath = path.join(baseDir, file);
+    // eslint-disable-next-line import/no-dynamic-require, global-require
     const controller = require(controllerPath);
-    logger.info(`route /${routeName}`);
     router.use(`/${routeName}`, controller);
   });
 });

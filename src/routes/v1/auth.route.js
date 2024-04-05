@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 const express = require('express');
-const validate = require('../common/middlewares/validate');
-const authValidation = require('../common/validations/auth.validation');
-const { authController } = require('../auth');
-const auth = require('../common/middlewares/auth');
+const validate = require('../../common/middlewares/validate');
+const authValidation = require('../../common/validations/auth.validation');
+const { authController } = require('../../auth');
+const auth = require('../../common/middlewares/auth');
 
 const router = express.Router();
 

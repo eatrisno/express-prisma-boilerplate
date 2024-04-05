@@ -1,5 +1,5 @@
 const app = require('./app');
-const logger = require('./common/config/logger');
+const logger = require('./common/logger');
 const config = require('./common/config/config');
 
 const server = app.listen(config.port, () => {

@@ -8,9 +8,9 @@ const httpStatus = require('http-status');
 const config = require('./common/config/config');
 const morgan = require('./common/config/morgan');
 const { jwtStrategy } = require('./common/config/passport');
-const routes = require('./routes');
+const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./common/middlewares/error');
-const ApiError = require('./common/utils/apiError');
+const ApiError = require('./utils/apiError');
 
 const app = express();
 
@@ -32,8 +32,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   sanitizer.clean({
     xss: true,
-    noSql: true,
-    sql: true,
   }),
 );
 // gzip compression

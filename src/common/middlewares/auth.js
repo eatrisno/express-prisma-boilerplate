@@ -1,6 +1,6 @@
 const passport = require('passport');
 const httpStatus = require('http-status');
-const ApiError = require('../utils/apiError');
+const ApiError = require('../../utils/apiError');
 const { roleRights } = require('../config/roles');
 
 // eslint-disable-next-line consistent-return
