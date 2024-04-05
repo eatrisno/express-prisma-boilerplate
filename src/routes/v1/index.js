@@ -14,10 +14,10 @@ fs.readdir(baseDir, (err, files) => {
     return;
   }
 
-  const routeFiles = files.filter((file) => file.endsWith('.route.js'));
+  const routeFiles = files.filter(((file) => file.endsWith('.js') && file !== 'index.js'));
 
   routeFiles.forEach((file) => {
-    const routeName = file.replace('.route.js', '');
+    const routeName = file.replace('.js', '');
     const controllerPath = path.join(baseDir, file);
     // eslint-disable-next-line import/no-dynamic-require, global-require
     const controller = require(controllerPath);

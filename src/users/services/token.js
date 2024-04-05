@@ -5,7 +5,7 @@ const config = require('../../common/config/config');
 const db = require('../../common/providers/database/prisma');
 const ApiError = require('../../utils/apiError');
 const { tokenTypes } = require('../../common/config/tokens');
-const { userService } = require('./user');
+const { userService } = require('./users');
 
 /**
  * Generate token

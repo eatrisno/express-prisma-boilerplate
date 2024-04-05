@@ -2,32 +2,34 @@
 const express = require('express');
 const validate = require('../../common/middlewares/validate');
 const authValidation = require('../../common/validations/auth.validation');
-const { authController } = require('../../auth/controllers');
+const { userController } = require('../../users/controllers');
 // const auth = require('../../common/middlewares/auth');
 
 const router = express.Router();
 
-router.post('/register', validate(authValidation.register), authController.register);
-router.post('/login', validate(authValidation.login), authController.login);
-router.post('/logout', validate(authValidation.logout), authController.logout);
-router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
-// router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
-// router.post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword);
-// router.post('/send-verification-email', auth(), authController.sendVerificationEmail);
-// router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
+// router.post('/register-wa', validate(authValidation.register), userController.registerWa);
+
+router.post('/register', validate(authValidation.register), userController.register);
+router.post('/login', validate(authValidation.login), userController.login);
+router.post('/logout', validate(authValidation.logout), userController.logout);
+router.post('/refresh-tokens', validate(authValidation.refreshTokens), userController.refreshTokens);
+// router.post('/forgot-password', validate(authValidation.forgotPassword), userController.forgotPassword);
+// router.post('/reset-password', validate(authValidation.resetPassword), userController.resetPassword);
+// router.post('/send-verification-email', auth(), userController.sendVerificationEmail);
+// router.post('/verify-email', validate(authValidation.verifyEmail), userController.verifyEmail);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Auth
+ *   name: User
  *   description: Authentication
  */
 
 /**
  * @swagger
- * /auth/register:
+ * /user/register:
  *   post:
  *     summary: Register as user
  *     tags: [Auth]
@@ -75,7 +77,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/login:
+ * /user/login:
  *   post:
  *     summary: Login
  *     tags: [Auth]
@@ -123,7 +125,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/logout:
+ * /user/logout:
  *   post:
  *     summary: Logout
  *     tags: [Auth]
@@ -149,7 +151,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/refresh-tokens:
+ * /user/refresh-tokens:
  *   post:
  *     summary: Refresh auth tokens
  *     tags: [Auth]
@@ -179,7 +181,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/forgot-password:
+ * /user/forgot-password:
  *   post:
  *     summary: Forgot password
  *     description: An email will be sent to reset password.
@@ -207,7 +209,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/reset-password:
+ * /user/reset-password:
  *   post:
  *     summary: Reset password
  *     tags: [Auth]
@@ -250,7 +252,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/send-verification-email:
+ * /user/send-verification-email:
  *   post:
  *     summary: Send verification email
  *     description: An email will be sent to verify email.
@@ -266,7 +268,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/verify-email:
+ * /user/verify-email:
  *   post:
  *     summary: verify email
  *     tags: [Auth]
