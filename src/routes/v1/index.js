@@ -14,7 +14,7 @@ fs.readdir(baseDir, (err, files) => {
     return;
   }
 
-  const routeFiles = files.filter(((file) => file.endsWith('.js') && file !== 'index.js'));
+  const routeFiles = files.filter(((file) => file !== 'index.js' && file.endsWith('.js')));
 
   routeFiles.forEach((file) => {
     const routeName = file.replace('.js', '');
