@@ -35,11 +35,20 @@ const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
  * @returns {Promise<Token>}
  */
 const saveToken = async (token, userId, expires, type, blacklisted = false) => {
-  const tokenDoc = await db.token.create(
+  const tokenDoc = await db.token.upsert(
     {
-      data: {
+      where: {
+        userId,
+      },
+      update: {
         token,
-        user: userId,
+        expires: expires.toDate(),
+        type,
+        blacklisted,
+      },
+      create: {
+        userId,
+        token,
         expires: expires.toDate(),
         type,
         blacklisted,

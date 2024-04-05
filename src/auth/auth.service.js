@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const bcrypt = require('bcryptjs');
 const tokenService = require('../token/token.service');
 const userService = require('../user/user.service');
 const ApiError = require('../common/utils/apiError');
@@ -13,7 +14,7 @@ const db = require('../common/providers/database/prisma');
  */
 const loginUserWithEmailAndPassword = async (email, password) => {
   const user = await userService.getUserByEmail(email);
-  if (!user || !(await user.isPasswordMatch(password))) {
+  if (!user || !bcrypt.compare(password, user.password)) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
   return user;
