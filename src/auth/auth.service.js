@@ -1,9 +1,9 @@
 const httpStatus = require('http-status');
-const tokenService = require('./token.service');
-const userService = require('./user.service');
-const ApiError = require('../utils/apiError');
-const { tokenTypes } = require('../config/tokens');
-const db = require('../db/prisma');
+const tokenService = require('../token/token.service');
+const userService = require('../user/user.service');
+const ApiError = require('../common/utils/apiError');
+const { tokenTypes } = require('../common/config/tokens');
+const db = require('../common/providers/database/prisma');
 
 /**
  * Login with username and password

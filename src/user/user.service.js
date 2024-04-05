@@ -1,8 +1,8 @@
 const httpStatus = require('http-status');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const ApiError = require('../utils/apiError');
-const db = require('../db/prisma');
+const ApiError = require('../common/utils/apiError');
+const db = require('../common/providers/database/prisma');
 
 /**
  * Get user by email

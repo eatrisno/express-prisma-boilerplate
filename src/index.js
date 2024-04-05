@@ -1,6 +1,6 @@
 const app = require('./app');
-const logger = require('./config/logger');
-const config = require('./config/config');
+const logger = require('./common/config/logger');
+const config = require('./common/config/config');
 
 const server = app.listen(config.port, () => {
   logger.info(`Environment ${config.env}`);

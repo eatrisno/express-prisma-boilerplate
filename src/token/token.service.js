@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const httpStatus = require('http-status');
-const config = require('../config/config');
-const userService = require('./user.service');
-const db = require('../db/prisma');
-const ApiError = require('../utils/apiError');
-const { tokenTypes } = require('../config/tokens');
+const config = require('../common/config/config');
+const userService = require('../user/user.service');
+const db = require('../common/providers/database/prisma');
+const ApiError = require('../common/utils/apiError');
+const { tokenTypes } = require('../common/config/tokens');
 
 /**
  * Generate token

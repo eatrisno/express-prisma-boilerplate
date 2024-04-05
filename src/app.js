@@ -5,12 +5,12 @@ const compression = require('compression');
 const cors = require('cors');
 const passport = require('passport');
 const httpStatus = require('http-status');
-const config = require('./config/config');
-const morgan = require('./config/morgan');
-const { jwtStrategy } = require('./config/passport');
-const routes = require('./routes/v1');
-const { errorConverter, errorHandler } = require('./middlewares/error');
-const ApiError = require('./utils/apiError');
+const config = require('./common/config/config');
+const morgan = require('./common/config/morgan');
+const { jwtStrategy } = require('./common/config/passport');
+const routes = require('./routes');
+const { errorConverter, errorHandler } = require('./common/middlewares/error');
+const ApiError = require('./common/utils/apiError');
 
 const app = express();
 
