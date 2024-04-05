@@ -45,10 +45,7 @@ const createUser = async (userBody) => {
       },
     },
   );
-  return {
-    email: user.email,
-    name: user.name,
-  };
+  return { id: user.id, name: user.name, email: user.email };
 };
 
 /**
