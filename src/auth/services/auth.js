@@ -85,11 +85,11 @@ const verifyEmail = async (verifyEmailToken) => {
   try {
     // eslint-disable-next-line max-len
     const verifyEmailTokenDoc = await tokenService.verifyToken(verifyEmailToken, tokenTypes.VERIFY_EMAIL);
-    const user = await userService.getUserById(verifyEmailTokenDoc.user);
+    const user = await userService.getUserById(verifyEmailTokenDoc.userId);
     if (!user) {
       throw new Error();
     }
-    await db.token.deleteMany({ user: user.id, type: tokenTypes.VERIFY_EMAIL });
+    await db.token.deleteMany({ userId: user.id, type: tokenTypes.VERIFY_EMAIL });
     await userService.updateUserById(user.id, { isEmailVerified: true });
   } catch (error) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Email verification failed');
