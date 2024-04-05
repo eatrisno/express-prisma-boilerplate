@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const ApiError = require('../utils/apiError');
-const db = require('./db.service');
+const db = require('../db/prisma');
 
 /**
  * Get user by email

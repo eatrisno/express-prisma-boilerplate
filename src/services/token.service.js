@@ -3,7 +3,7 @@ const moment = require('moment');
 const httpStatus = require('http-status');
 const config = require('../config/config');
 const userService = require('./user.service');
-const db = require('./db.service');
+const db = require('../db/prisma');
 const ApiError = require('../utils/apiError');
 const { tokenTypes } = require('../config/tokens');
 

@@ -3,7 +3,7 @@ const tokenService = require('./token.service');
 const userService = require('./user.service');
 const ApiError = require('../utils/apiError');
 const { tokenTypes } = require('../config/tokens');
-const db = require('./db.service');
+const db = require('../db/prisma');
 
 /**
  * Login with username and password
