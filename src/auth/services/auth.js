@@ -18,7 +18,9 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   if (!user || !bcrypt.compare(password, user.password)) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
-  return { id: user.id, email: user.email, name: user.name };
+  return {
+    id: user.id, email: user.email, name: user.name, role: user.role,
+  };
 };
 
 /**
