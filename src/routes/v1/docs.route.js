@@ -1,13 +1,13 @@
 const express = require('express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDefinition = require('../../common/docs/swaggerDef');
+const swaggerDefinition = require('../../docs/swaggerDef');
 
 const router = express.Router();
 
 const specs = swaggerJsdoc({
   swaggerDefinition,
-  apis: ['src/routes/*.js'],
+  apis: ['src/routes/*/*.js'],
 });
 
 router.use('/', swaggerUi.serve);
