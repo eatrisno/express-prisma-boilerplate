@@ -2,7 +2,7 @@
 const express = require('express');
 const validate = require('../../common/middlewares/validate');
 const authValidation = require('../../common/validations/auth.validation');
-const { authController } = require('../../auth');
+const { authController } = require('../../auth/controllers');
 const auth = require('../../common/middlewares/auth');
 
 const router = express.Router();

@@ -1,11 +1,11 @@
 const httpStatus = require('http-status');
 const bcrypt = require('bcryptjs');
-const db = require('../common/providers/database/prisma');
-const { userService } = require('../user');
-const { tokenService } = require('../token');
-const { tokenTypes } = require('../common/config/tokens');
-const ApiError = require('../utils/apiError');
-const logger = require('../common/logger');
+const db = require('../../common/providers/database/prisma');
+const userService = require('./user');
+const tokenService = require('./token');
+const { tokenTypes } = require('../../common/config/tokens');
+const ApiError = require('../../utils/apiError');
+const logger = require('../../common/logger');
 
 /**
  * Login with username and password
