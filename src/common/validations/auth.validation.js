@@ -1,6 +1,5 @@
 const Joi = require('joi');
 // eslint-disable-next-line import/no-extraneous-dependencies
-const JoiPhoneNumber = Joi.extend(require('joi-phone-number'));
 const { password } = require('./custom.validation');
 
 const register = {
@@ -13,7 +12,14 @@ const register = {
 
 const registerOtp = {
   body: Joi.object().keys({
-    phone: JoiPhoneNumber.string().required().phoneNumber(),
+    phone: Joi.string()
+      .pattern(/[6-9]{1}[0-9]{9}/)
+      .required()
+      .messages({
+        'any.required': 'Phone number is required.',
+        'string.empty': 'Phone number cannot be empty.',
+        'string.pattern.base': 'Phone number is invalid.',
+      }),
   }),
 };
 

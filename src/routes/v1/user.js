@@ -7,26 +7,6 @@ const { userController } = require('../../users/controllers');
 
 const router = express.Router();
 
-/**
- * @swagger
- * /user/generate-otp:
- *   post:
- *     summary: Register as user
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - phone
- *             properties:
- *               phone:
- *                 type: string
- *             example:
- *               phone: +628889331277
- */
 router.post('/generate-otp', validate(authValidation.registerOtp), userController.generateOtp);
 // router.post('/verify-otp', validate(authValidation.register), userController.verifyOtp);
 
@@ -47,6 +27,41 @@ module.exports = router;
  * tags:
  *   name: User
  *   description: Authentication
+ */
+
+/**
+ * @swagger
+ * /user/generate-otp:
+ *   post:
+ *     summary: Register as user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - phone
+ *             properties:
+ *               phone:
+ *                 type: string
+ *             example:
+ *               phone: "+628889331277"
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "400":
+ *         $ref: '#/components/responses/DuplicateEmail'
  */
 
 /**

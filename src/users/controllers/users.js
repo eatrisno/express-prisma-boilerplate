@@ -9,7 +9,7 @@ const register = catchAsync(async (req, res) => {
 });
 
 const generateOtp = catchAsync(async (req, res) => {
-  res.send({ });
+  res.send({ status: 'ok' });
 });
 
 const verifyOtp = catchAsync(async (req, res) => {
