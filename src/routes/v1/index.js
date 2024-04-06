@@ -16,11 +16,13 @@ fs.readdir(baseDir, (err, files) => {
 
   const routeFiles = files.filter(((file) => file !== 'index.js' && file.endsWith('.js')));
 
+  logger.info('Loading routes');
   routeFiles.forEach((file) => {
     const routeName = file.replace('.js', '');
     const controllerPath = path.join(baseDir, file);
     // eslint-disable-next-line import/no-dynamic-require, global-require
     const controller = require(controllerPath);
+    logger.info(`--> ${routeName}`);
     router.use(`/${routeName}`, controller);
   });
 });

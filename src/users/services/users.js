@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const ApiError = require('../../utils/apiError');
 const db = require('../../common/providers/database/prisma');
-const { roles } = require('../../common/config/roles');
 
 /**
  * Get user by email
@@ -43,7 +42,6 @@ const createUser = async (userBody) => {
         name: userBody.name,
         email: userBody.email,
         password: await bcrypt.hash(userBody.password, 8),
-        role: (userBody.role in roles) ? userBody.role : 'user',
       },
     },
   );

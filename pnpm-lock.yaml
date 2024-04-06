@@ -32,6 +32,9 @@ dependencies:
   joi:
     specifier: ^17.12.3
     version: 17.12.3
+  joi-phone-number:
+    specifier: ^5.1.1
+    version: 5.1.1
   jsonwebtoken:
     specifier: ^9.0.2
     version: 9.0.2
@@ -1337,6 +1340,11 @@ packages:
       define-properties: 1.2.1
     dev: true
 
+  /google-libphonenumber@3.2.27:
+    resolution: {integrity: sha512-et3QlrfWemNPhyUfXZmJG8TfzitfAN71ygNI15+B35zNge/7vyZxkpDsc13oninkf8RAtN2kNEzvMr4L1n3vfQ==}
+    engines: {node: '>=0.10'}
+    dev: false
+
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
@@ -1603,6 +1611,13 @@ packages:
   /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
+
+  /joi-phone-number@5.1.1:
+    resolution: {integrity: sha512-sCrH/GP5ShkPTW8jVQXxAVxvgHZ1CQTmAvIp0JGEUaGsPAY5l+ByapIwNJlVsY7LPtCDZW996o5R66+W0nk9qQ==}
+    engines: {node: '>=12.16.0'}
+    dependencies:
+      google-libphonenumber: 3.2.27
+    dev: false
 
   /joi@17.12.3:
     resolution: {integrity: sha512-2RRziagf555owrm9IRVtdKynOBeITiDpuZqIpgwqXShPncPKNiRQoiGsl/T8SQdq+8ugRzH2LqY67irr2y/d+g==}

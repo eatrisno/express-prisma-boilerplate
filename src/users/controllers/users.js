@@ -8,6 +8,14 @@ const register = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send({ user, tokens });
 });
 
+const generateOtp = catchAsync(async (req, res) => {
+  res.send({ });
+});
+
+const verifyOtp = catchAsync(async (req, res) => {
+  res.send({ });
+});
+
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
@@ -56,4 +64,6 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  generateOtp,
+  verifyOtp,
 };

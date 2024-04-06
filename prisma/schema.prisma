@@ -14,20 +14,32 @@ datasource db {
 }
 
 model User {
-    id   String @id @default(uuid())
-    email String  @unique
-    name  String?
-    password  String
-    role String @default("user")
-    token Token?
+  id          String    @id @default(uuid())
+  role        String    @default("user")
+  email       String?   @unique
+  phone       String?   @unique
+  password    String?
+  name        String?
+  otpToken    OtpToken?
+  token       Token?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
 }
 
 model Token {
-    user    User @relation(fields: [userId], references: [id])
-    userId  String  @unique
-    token   String
-    type String
-    expires DateTime
-    blacklisted Boolean
-    timestamp DateTime @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String    @unique
+  token       String
+  type        String
+  expires     DateTime
+  blacklisted Boolean
+  timestamp   DateTime  @default(now())
+}
+
+model OtpToken {
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String      @unique
+  otpCode     String
+  expires     DateTime
+  timestamp   DateTime    @default(now())
 }

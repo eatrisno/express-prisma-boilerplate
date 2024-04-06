@@ -1,4 +1,6 @@
 const Joi = require('joi');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const JoiPhoneNumber = Joi.extend(require('joi-phone-number'));
 const { password } = require('./custom.validation');
 
 const register = {
@@ -6,6 +8,12 @@ const register = {
     email: Joi.string().required().email(),
     password: Joi.string().required().custom(password),
     name: Joi.string().required(),
+  }),
+};
+
+const registerOtp = {
+  body: Joi.object().keys({
+    phone: JoiPhoneNumber.string().required().phoneNumber(),
   }),
 };
 
@@ -57,4 +65,5 @@ module.exports = {
   forgotPassword,
   resetPassword,
   verifyEmail,
+  registerOtp,
 };
